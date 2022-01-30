@@ -40,7 +40,7 @@ const sess = {
 
 (async () => {
   try {
-    await mongoose.connect("mongodb://localhost/chat");
+    await mongoose.connect(process.env.DB);
     console.log("db ok");
   } catch (error) {
     console.log(error);
