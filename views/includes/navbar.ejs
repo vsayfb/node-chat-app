@@ -20,7 +20,7 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Link</a>
         </li>
-        <% if (user._id) { %>
+        <% if (user && user._id) { %>
         <li class="nav-item dropdown">
           <a
             class="nav-link dropdown-toggle"
@@ -54,7 +54,7 @@
         </li>
         <% } %>
       </ul>
-      <% if (!user._id) { %>
+      <% if (user &&!user._id) { %>
       <div>
         <a href="/auth/login" class="text-decoration-none text-dark me-4"
           >Log In</a
@@ -63,9 +63,9 @@
           >Register</a
         >
       </div>
-      <% } %> <% if (user._id) { %>
+      <% } %> <% if (user && user._id) { %>
       <div>
-        <% if (user._id) { %>
+        <% if (user && user._id) { %>
         <div><%=user.name%></div>
         <% } %>
         <a href="/auth/logout" class="text-decoration-none">Logout</a>
