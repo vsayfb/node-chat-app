@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./includes/head.ejs")%>
+  <body>
+    <!--  -->
+    <div style="height: 100vh">
+      <div class="bg-success"><h1>Send message to <%=target.name%></h1></div>
+      <ul style="height: 86.5%" id="messages" class="list-group">
+        <% if (data && data.messages) { %> <% for( let i = 0; i <
+        data.messages.length; i++ ) { %>
+        <li class="list-group-item"><%=data.messages[i].text%></li>
+        <% } %> <% } %>
+      </ul>
+      <form class="bg-warning p-1" id="form" onsubmit="handleSubmit(event)">
+        <input type="hidden" id="target" value="<%=target._id%>" />
+        <input type="hidden" id="origin" value="<%=user._id%>" />
+        <input type="hidden" id="chat" value="<%chat._id%>" />
+
+        <input
+          type="text"
+          id="input"
+          class="form-group w-100"
+          style="outline: 0; border: none"
+          placeholder="Write Message"
+          autocomplete="off"
+        />
+      </form>
+    </div>
+    <!--  -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+      //   var socket = io();
+
+      //   var messages = document.getElementById("messages");
+      //   var form = document.getElementById("form");
+      //   var input = document.getElementById("input");
+      //   var target = document.getElementById("target").value;
+      //   var origin = document.getElementById("origin").value;
+
+      //   socket.emit("chat", { target, origin });
+
+      //   socket.on("created chat", (chat) => {
+      //     document.getElementById("chat").value = chat;
+      //     console.log(document.getElementById("chat").value);
+      //   });
+
+      //   function handleSubmit(e) {
+      //     e.preventDefault();
+
+      //     if (input.value) {
+      //       const data = new FormData(e.target);
+
+      //       socket.emit("chat message", {
+      //         target,
+      //         text: input.value,
+      //         origin,
+      //         chat: document.getElementById("chat").value,
+      //       });
+      //       input.value = "";
+      //     }
+      //   }
+
+      //   socket.on("response", function (msg) {
+      //     console.log(msg);
+      //     var item = document.createElement("li");
+      //     item.className = "list-group-item";
+      //     item.textContent = msg;
+      //     messages.appendChild(item);
+      //     window.scrollTo(0, document.body.scrollHeight);
+      //   });
+    </script>
+  </body>
+</html>

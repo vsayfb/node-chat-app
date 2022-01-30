@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./includes/head.ejs")%>
+  <body>
+    <%- include("./includes/navbar.ejs")%>
+    <div
+      style="height: 100vh"
+      class="container d-flex align-items-center justify-content-center"
+    >
+      <% if (users.length) { %>
+      <ul class="list-group">
+        <% for( let i = 0; i < users.length; i++ ) { %>
+        <!--  -->
+        <% if (user._id) { %>
+        <!--  -->
+        <% if (user._id.toString()!==users[i]._id.toString()) { %>
+
+        <li class="list-group-item">
+          <%=users[i].name%>
+          <button
+            class="btn btn-warning"
+            onclick="createChat('<%=users[i]._id%>')"
+          >
+            Message
+          </button>
+        </li>
+        <% } %> <% } %>
+        <!--  -->
+        <% } %>
+      </ul>
+      <% } %>
+    </div>
+  </body>
+  <script>
+    function createChat(target) {
+      const xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+          window.location = this.responseText;
+        }
+      };
+
+      xhttp.open("POST", `/chat`);
+
+      xhttp.setRequestHeader("user", target);
+
+      xhttp.send();
+    }
+  </script>
+</html>

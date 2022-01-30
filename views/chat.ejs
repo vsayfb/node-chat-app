@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./includes/head.ejs")%>
+  <body>
+    <!--  -->
+    <div style="height: 100vh">
+      <div class="bg-success d-flex">
+        <h1 class="ms-3"><%=user2.name%> :</h1>
+        <h1 class="ms-2" id="status">offline</h1>
+      </div>
+      <ul
+        style="height: 86.5%; overflow: auto"
+        id="messages"
+        class="list-group"
+      >
+        <% if (messages && messages.length) { %>
+        <!--  -->
+        <% for( let i = 0; i < messages.length; i++ ) { %>
+        <li class="list-group-item">
+          <span class="text-success"><%=messages[i].user.name%></span>
+          <b><%=messages[i].text%></b>
+        </li>
+        <% } %>
+        <!--  -->
+        <% } %>
+      </ul>
+
+      <form class="bg-warning p-1" id="form" onsubmit="handleSubmit(event)">
+        <input type="hidden" id="origin" value="<%=user._id%>" />
+        <input type="hidden" id="originName" value="<%=user.name%>" />
+        <input type="hidden" id="targetName" value="<%=user2.name%>" />
+        <input type="hidden" id="target" value="<%=user2._id%>" />
+        <input type="hidden" id="chat" value="<%=chat%>" />
+
+        <input
+          type="text"
+          onkeyup="handleKeyDown(event)"
+          id="input"
+          class="form-group w-100"
+          style="outline: 0; border: none"
+          placeholder="Write Message"
+          autocomplete="off"
+        />
+      </form>
+    </div>
+    <!--  -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script src="/chat.js"></script>
+  </body>
+</html>

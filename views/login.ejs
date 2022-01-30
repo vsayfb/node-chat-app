@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./includes/head.ejs")%>
+  <body
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    "
+  >
+    <form class="w-50" onsubmit="handleSubmit(event)">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" name="name" />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" />
+      </div>
+      <button type="submit" class="btn btn-warning">Sign In</button>
+    </form>
+
+    <script>
+      function handleSubmit(e) {
+        e.preventDefault();
+
+        const data = new FormData(e.target);
+        const xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function () {
+          if (this.readyState == 4 && this.status) {
+            if (this.status === 200) window.location = "/";
+            else alert(xhttp.responseText);
+          }
+        };
+        xhttp.open("POST", "/auth/login");
+        xhttp.send(data);
+      }
+    </script>
+  </body>
+</html>
